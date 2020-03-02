@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  postgres-compose:
+    image: postgres:12
+    environment:
+      POSTGRES_PASSWORD: "Postgres2019!"
+      POSTGRES_DB: article
+    ports:
+      - "15432:5432"
+    volumes:
+      - /media/popete/dados/workspace-eclipse/articles-demo/docker-infra
+    networks:
+      - article-postgres-network
+   
+networks: 
+  article-postgres-network:
+    driver: bridge
