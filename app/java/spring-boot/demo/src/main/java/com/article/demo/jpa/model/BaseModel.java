@@ -1,24 +1,26 @@
 package com.article.demo.jpa.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.article.demo.jpa.dto.parser.ModelInterface;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
 @MappedSuperclass
-public abstract class BaseModel implements Serializable {
+@SuperBuilder
+public abstract class BaseModel implements ModelInterface {
 
   private static final long serialVersionUID = -7727369263694793386L;
 
