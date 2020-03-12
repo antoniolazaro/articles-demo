@@ -9,6 +9,7 @@ import com.article.demo.jpa.domain.tag.model.Tag;
 import com.article.demo.jpa.domain.tag.repository.TagRepository;
 import com.article.demo.jpa.exception.BusinessException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,12 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
 public class TagService {
 
-  private final TagRepository repository;
-  private final TagDTOModelParser DTOModelParser;
+  @Autowired
+  private TagRepository repository;
+  @Autowired
+  private TagDTOModelParser DTOModelParser;
 
   public List<TagDTO> findAll() {
     return DTOModelParser.convertListModelToListDTO(repository.findAll());
@@ -55,12 +57,12 @@ public class TagService {
 
   public List<TagDTO> findByNamePaged(String name, Integer currentPage, Integer pageSize) {
     return DTOModelParser
-        .convertListModelToListDTO(repository.findByNamePaged(name, PageRequest.of(currentPage, pageSize)).toList());
+        .convertListModelToListDTO(repository.findNamePaged(name, PageRequest.of(currentPage, pageSize)).toList());
   }
 
   public List<TagDTO> findByNamePaged(String name, Integer currentPage, Integer pageSize, String sortBy) {
     return DTOModelParser.convertListModelToListDTO(
-        repository.findByNamePaged(name, PageRequest.of(currentPage, pageSize, Sort.by(sortBy).ascending())).toList());
+        repository.findNamePaged(name, PageRequest.of(currentPage, pageSize, Sort.by(sortBy).ascending())).toList());
   }
 
   public List<TagDTO> findByPartOfDescription(String parteOfDescription) {

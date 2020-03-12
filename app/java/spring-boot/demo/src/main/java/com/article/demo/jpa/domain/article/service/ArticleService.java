@@ -6,15 +6,16 @@ import com.article.demo.jpa.domain.article.model.Article;
 import com.article.demo.jpa.domain.article.repository.ArticleRepository;
 import com.article.demo.jpa.exception.BusinessException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
 public class ArticleService {
 
-  private final ArticleRepository repository;
+  @Autowired
+  private ArticleRepository repository;
 
   public List<Article> findAll() {
     return repository.findAll();

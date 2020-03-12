@@ -6,6 +6,7 @@ import com.article.demo.jpa.domain.tag.dto.TagDTO;
 import com.article.demo.jpa.domain.tag.dto.parser.TagDTOModelParser;
 import com.article.demo.jpa.domain.tag.service.TagService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +22,12 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/jpa/tag")
-@RequiredArgsConstructor
 public class TagController {
 
-  private final TagService service;
-  private final TagDTOModelParser DTOModelParser;
+  @Autowired
+  private TagService service;
+  @Autowired
+  private TagDTOModelParser DTOModelParser;
 
   @GetMapping("/")
   public ResponseEntity<List<TagDTO>> findAll() {
